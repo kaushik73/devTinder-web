@@ -1,11 +1,19 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import NavBar from "./components/NavBar";
+import Body from "./components/Body";
 
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline bg-neutral-600">
-        Hello world!
-      </h1>
+      <BrowserRouter basename="/">
+        <Routes>
+          <Route path="/" element={<Body />}>
+            <Route path="/login" element={<div>Login Page</div>} />
+            <Route path="/profile" element={<div>profile Page</div>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
