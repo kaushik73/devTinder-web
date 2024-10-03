@@ -21,10 +21,9 @@ const Body = () => {
     } catch (err) {
       // token is not there in cookies
       if (err.status === 401) {
-        console.log(err.response.data.message);
         navigate("/login");
       }
-      console.log("Error : ", err);
+      console.error("Error : ", err);
     }
   };
 
