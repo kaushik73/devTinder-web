@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
@@ -103,10 +103,13 @@ const Login = () => {
               <span>{err}</span>
             </div>
           )}
-          <div className="card-actions justify-center">
-            <button className="btn btn-primary" onClick={handleLogin}>
+          <div className="card-actions justify-around items-center">
+            <button className=" btn btn-primary" onClick={handleLogin}>
               Login
             </button>
+            <Link className="text-sm hover:text-blue-900" to="/signup">
+              New User? Let's Create a account
+            </Link>
           </div>
         </div>
       </div>

@@ -13,9 +13,14 @@ const Body = () => {
   const userData = useSelector((store) => store.user);
   const fetchUser = async () => {
     try {
-      const res = await axios.get(BASE_URL + "/profile/view", {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        BASE_URL + "/profile/view",
+
+        {
+          withCredentials: true,
+        }
+      );
+      console.log("After refrehs ", res);
 
       dispatch(addUser(res.data.data));
     } catch (err) {
@@ -28,6 +33,8 @@ const Body = () => {
   };
 
   useEffect(() => {
+    console.log(userData, "userData");
+
     if (!userData) fetchUser();
   }, []);
 
