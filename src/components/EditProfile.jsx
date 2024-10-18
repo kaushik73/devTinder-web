@@ -51,7 +51,7 @@ const EditProfile = () => {
     } catch (err) {
       setError("Something Went Wrong, Please try again later");
 
-      console.err(err);
+      console.error(err);
     }
   };
   return (

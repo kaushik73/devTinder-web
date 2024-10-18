@@ -20,7 +20,6 @@ const Body = () => {
           withCredentials: true,
         }
       );
-      console.log("After refrehs ", res);
 
       dispatch(addUser(res.data.data));
     } catch (err) {
@@ -39,10 +38,16 @@ const Body = () => {
   }, []);
 
   return (
-    <div>
-      <NavBar />
-      <Outlet />
-      <Footer />
+    <div className="flex flex-col min-h-screen">
+      <div className="min-h-header">
+        <NavBar />
+      </div>
+      <main className="flex-grow">
+        <Outlet />
+      </main>
+      <div className="min-h-footer">
+        <Footer />
+      </div>
     </div>
   );
 };

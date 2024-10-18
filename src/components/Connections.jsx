@@ -28,12 +28,13 @@ const Connections = () => {
   return (
     <div
       className="grid 
-    lg:grid-cols-3 
-    md:grid-cols-2 
-    sm:grid-cols-1 my-3"
+      
+      lg:grid-cols-3 
+      md:grid-cols-2 
+      sm:grid-cols-1 my-3"
     >
       {connections.map((connection) => {
-        console.log("connection cvard", connection);
+        console.log("connection card", connection);
 
         return (
           <div key={connection._id}>

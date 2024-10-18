@@ -16,7 +16,7 @@ const Footer = () => {
         <p className="font-bold">
           Kaushik Jain.
           <br />
-          Providing reliable tech since 1992
+          Connecting you with peeps
         </p>
         <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
       </aside>

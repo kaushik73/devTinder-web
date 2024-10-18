@@ -5,10 +5,14 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed, removeUserFromFeed } from "../store/feedSlice";
 import FeedCard from "./cards/FeedCard";
+import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const feedData = useSelector((store) => store.feed);
+  const userData = useSelector((store) => store.user);
+
   const getFeedData = async () => {
     try {
       const res = await axios.get(BASE_URL + "/user/feed", {
@@ -39,6 +43,7 @@ const Feed = () => {
   };
 
   useEffect(() => {
+    if (!userData) navigate("/login");
     if (feedData) return;
     getFeedData();
   }, []);
