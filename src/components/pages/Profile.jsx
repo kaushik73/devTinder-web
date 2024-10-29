@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
-import { addUser } from "../store/userSlice";
-import UserCard from "./cards/UserCard";
+import { BASE_URL } from "../../utils/constants";
+import { addUser } from "../../store/userSlice";
+import UserCard from "../cards/UserCard";
+import { validateForm } from "../../utils/formvalidation";
+import ErrorMessage from "../common/ErrorMessage";
+import { useNavigate } from "react-router-dom";
 
-const EditProfile = () => {
+const Profile = () => {
   const user = useSelector((store) => store.user);
   const [fName, setfName] = useState("");
   const [lName, setlName] = useState("");
@@ -15,6 +18,8 @@ const EditProfile = () => {
   const [profileURL, setProfileURL] = useState("");
   const [err, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [somethingWrong, setSomethingWrong] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,6 +33,9 @@ const EditProfile = () => {
     }
   }, [user]);
   const handleProfileUpdate = async () => {
+    if (!validateForm({ fName, lName, age, gender }, setError)) {
+      return;
+    }
     try {
       const res = await axios.patch(
         BASE_URL + "/profile/edit",
@@ -45,20 +53,25 @@ const EditProfile = () => {
       if (res.status === 200) {
         setSuccessMsg(res.data.message);
         dispatch(addUser(res.data.data));
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       } else {
-        console.log("Todo : Check more and do the fix");
+        throw new Error("Something Went Wrong, Please Try Later");
       }
     } catch (err) {
-      setError("Something Went Wrong, Please try again later");
-
-      console.error(err);
+      setSomethingWrong(true);
+      console.log(err);
     }
   };
+
+  if (somethingWrong) return <ErrorMessage />;
+
   return (
     <>
       {user && (
-        <div className="flex justify-evenly mt-2">
-          <div className="flex justify-center mb-5">
+        <div className="flex justify-evenly m-4 h-[90%]">
+          <div className="flex flex-col md:flex-row justify-center gap-10">
             <div className="card bg-base-300 w-96 shadow-xl ">
               <div className="card-body">
                 <h2 className="card-title m-auto">Edit Profile!</h2>
@@ -102,7 +115,7 @@ const EditProfile = () => {
                     value={profileURL}
                     onChange={(e) => setProfileURL(e.target.value)}
                     className="grow"
-                    placeholder="profile profileURL"
+                    placeholder="profile URL"
                   />
                 </label>
 
@@ -183,16 +196,18 @@ const EditProfile = () => {
                 </div>
               </div>
             </div>
+            <div className="flex justify-center items-center">
+              <UserCard
+                user={{ fName, lName, age, gender, about, profileURL }}
+              />
+            </div>
           </div>
 
           {/* Preview Card */}
-          <div>
-            <UserCard user={{ fName, lName, age, gender, about, profileURL }} />
-          </div>
         </div>
       )}
     </>
   );
 };
 
-export default EditProfile;
+export default Profile;

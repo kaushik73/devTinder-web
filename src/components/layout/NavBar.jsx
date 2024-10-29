@@ -1,17 +1,17 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { BASE_URL } from "../utils/constants";
-import { removeUser } from "../store/userSlice";
-import { emptyFeedList } from "../store/feedSlice";
-import { emptyRequestList } from "../store/requestSlice";
-import { removeConnection } from "../store/connectionReducer";
+import { BASE_URL } from "../../utils/constants";
+import { removeUser } from "../../store/userSlice";
+import { emptyFeedList } from "../../store/feedSlice";
+import { emptyRequestList } from "../../store/requestSlice";
+import { removeConnection } from "../../store/connectionReducer";
 import { useLocation } from "react-router-dom";
 
 const NavBar = () => {
   const location = useLocation();
   const currentURLPath = location.pathname;
-  const hideLoginLocations = ["/login", "signup"];
+  const hideLoginLocations = ["/login", "/signup"];
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const handleLogout = async () => {

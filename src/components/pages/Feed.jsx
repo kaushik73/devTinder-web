@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useEffect } from "react";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addFeed, removeUserFromFeed } from "../store/feedSlice";
-import FeedCard from "./cards/FeedCard";
+import { addFeed, removeUserFromFeed } from "../../store/feedSlice";
+import FeedCard from "../cards/FeedCard";
 import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
@@ -28,6 +27,7 @@ const Feed = () => {
     }
   };
 
+  // Todo : Handle Error Properly
   const handleRequest = async (status, _id) => {
     try {
       const res = await axios.post(
@@ -60,14 +60,6 @@ const Feed = () => {
             handleRequest={handleRequest}
           />
         </div>
-
-        // <>
-        //   <div className="flex-col items-center">
-        //     {feedData.map((user) => {
-        //       return <UserCard key={user._id} user={user} />;
-        //     })}
-        //   </div>{" "}
-        // </>
       )}
     </>
   );

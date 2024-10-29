@@ -1,15 +1,17 @@
-import { useEffect } from "react";
-import NavBar from "./NavBar";
+import { useEffect, useState } from "react";
+import NavBar from "../layout/NavBar";
 import { Outlet, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser } from "../store/userSlice";
+import { addUser } from "../../store/userSlice";
+import ErrorMessage from "../common/ErrorMessage";
 
 const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showError, setShowError] = useState(false);
   const userData = useSelector((store) => store.user);
   const fetchUser = async () => {
     try {
@@ -26,16 +28,17 @@ const Body = () => {
       // token is not there in cookies
       if (err.status === 401) {
         navigate("/login");
+      } else {
+        setShowError(true);
       }
-      console.error("Error : ", err);
     }
   };
 
   useEffect(() => {
-    console.log(userData, "userData");
-
     if (!userData) fetchUser();
   }, []);
+
+  if (showError) return <ErrorMessage />;
 
   return (
     <div className="flex flex-col min-h-screen">

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 const Toaster = ({ message, type }) => {
   return (
     <div className="toast toast-top toast-end">

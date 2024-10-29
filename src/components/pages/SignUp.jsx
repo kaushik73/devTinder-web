@@ -1,10 +1,9 @@
 import { useState } from "react";
-
-import { useDispatch } from "react-redux";
+import ErrorMessage from "../common/ErrorMessage";
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
-import { addUser } from "../store/userSlice";
+import { BASE_URL } from "../../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
+import { validateForm } from "../../utils/formvalidation";
 
 const SignUp = () => {
   const [fName, setfName] = useState("");
@@ -17,10 +16,16 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [err, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
-  const dispatch = useDispatch();
+  const [somethingWrong, setSomethingWrong] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSignup = async () => {
+    if (
+      !validateForm({ fName, lName, age, gender, email, password }, setError)
+    ) {
+      return;
+    }
     try {
       const res = await axios.post(
         BASE_URL + "/signup",
@@ -37,21 +42,19 @@ const SignUp = () => {
         { withCredentials: true }
       );
 
-      if (res.status === 203) {
-        setError(res.data.message);
-      } else if (res.status === 200) {
+      if (res.status === 201) {
         setSuccessMsg(res.data.message);
         navigate("/login");
-        // dispatch(addUser({ fName, lName, age, gender, about, profileURL }));
       } else {
-        console.log("Todo : Check more and do the fix");
+        throw new Error("Something Went Wrong, Please Try Later");
       }
     } catch (err) {
-      setError("Something Went Wrong, Please try again later");
-
-      console.err(err);
+      setSomethingWrong(true);
+      console.log(err);
     }
   };
+  if (somethingWrong) return <ErrorMessage />;
+
   return (
     <>
       <div className="flex justify-center mb-5">
@@ -59,9 +62,10 @@ const SignUp = () => {
           <div className="card-body">
             <h2 className="card-title m-auto">Sign up to Connect and Chat!</h2>
 
-            <div className="flex gap-2  justify-center">
+            {/* fName and lName */}
+            <div className=" flex flex-col md:flex-row w-full gap-2  justify-center">
               {/* First Name */}
-              <label className=" w-1/2 input input-bordered flex items-center gap-2">
+              <label className=" w-full md:w-1/2 input input-bordered flex items-center gap-2">
                 <input
                   type="text"
                   value={fName}
@@ -72,7 +76,7 @@ const SignUp = () => {
               </label>
 
               {/* Last Name */}
-              <label className="w-1/2 input input-bordered flex items-center gap-2">
+              <label className=" w-full md:w-1/2 input input-bordered flex items-center gap-2">
                 <input
                   type="text"
                   value={lName}
@@ -82,9 +86,11 @@ const SignUp = () => {
                 />
               </label>
             </div>
-            <div className="flex gap-2 justify-center">
+
+            {/* email and passowrd */}
+            <div className="flex flex-col md:flex-row  gap-2 justify-center">
               {/* email */}
-              <label className="w-1/2  input input-bordered flex items-center gap-2">
+              <label className=" w-full md:w-1/2  input input-bordered flex items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
@@ -104,7 +110,7 @@ const SignUp = () => {
               </label>
 
               {/* password */}
-              <label className="w-1/2  input input-bordered flex items-center gap-2">
+              <label className=" w-full md:w-1/2  input input-bordered flex items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
@@ -125,11 +131,15 @@ const SignUp = () => {
                 />
               </label>
             </div>
-            <div className="flex gap-2 justify-around">
+
+            {/* age and gender */}
+            <div className="flex flex-col md:flex-row  gap-2 justify-around">
               {/* Age */}
-              <label className="w-1/3  input input-bordered flex items-center gap-2">
+              <label className=" w-full md:w-1/3  input input-bordered flex items-center gap-2">
                 <input
                   type="number"
+                  // inputMode="numeric"
+                  // pattern="[0-9]*"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
                   className="grow"
@@ -138,7 +148,7 @@ const SignUp = () => {
               </label>
 
               {/* Gender */}
-              <label className=" w-2/3  input-bordered">
+              <label className="  w-full md:w-2/3   input-bordered">
                 <select
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
@@ -153,6 +163,7 @@ const SignUp = () => {
                 </select>
               </label>
             </div>
+
             {/* profileURL */}
             <label className="input input-bordered flex items-center gap-2">
               <input
@@ -160,7 +171,7 @@ const SignUp = () => {
                 value={profileURL}
                 onChange={(e) => setProfileURL(e.target.value)}
                 className="grow"
-                placeholder="profile profileURL"
+                placeholder="profile URL"
               />
             </label>
 
@@ -214,10 +225,10 @@ const SignUp = () => {
               </div>
             )}
 
-            {/* Update Button */}
-            <div className="card-actions justify-between items-start ">
+            {/* Sign Button */}
+            <div className="flex justify-around items-center card-actions ">
               <button
-                className="ml-[40%] btn btn-primary "
+                className="md:ml-[40%] btn btn-primary "
                 onClick={handleSignup}
               >
                 Sign Up

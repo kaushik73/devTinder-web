@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 const Modal = ({ buttonContent, modalHeading, modalContent }) => {
   return (
     <div className="card-actions justify-start">

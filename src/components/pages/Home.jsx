@@ -7,8 +7,8 @@ const Home = () => {
       <div className="flex flex-col items-center justify-center text-center h-[80vh]">
         <h1 className="text-6xl font-extrabold mb-4">Find Your Match</h1>
         <p className="text-lg max-w-md">
-          Join millions of people who have connected through Tinder. Start
-          swiping and find your perfect match today!
+          Join millions of people through devTinder. Start connecting with
+          brilliant developers!
         </p>
         <Link
           to="/feed"
