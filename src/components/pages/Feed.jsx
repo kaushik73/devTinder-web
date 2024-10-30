@@ -16,6 +16,8 @@ const Feed = () => {
     try {
       const res = await axios.get(BASE_URL + "/user/feed", {
         withCredentials: true,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       });
 
       if (res.data.data) {
