@@ -15,8 +15,6 @@ const Connections = () => {
     try {
       const res = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       });
 
       if (res.status === 204) {
