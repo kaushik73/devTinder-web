@@ -10,8 +10,14 @@ import Requests from "./components/pages/Requests";
 import Home from "./components/pages/Home";
 import Profile from "./components/pages/Profile";
 import PageNotFound from "./components/pages/PageNotFound";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    const env = import.meta.env.VITE_API_APP_ENV === "local" ? "Local" : "";
+    document.title = ` (${env}) Dev Tinder`;
+  }, []);
+
   return (
     <Provider store={appStore}>
       <HashRouter basename="/">

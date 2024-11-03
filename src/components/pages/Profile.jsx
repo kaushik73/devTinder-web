@@ -47,7 +47,7 @@ const Profile = () => {
           gender,
           profileURL,
         },
-        { headers: HEADERS, withCredentials: true }
+        { withCredentials: true }
       );
 
       if (res.status === 200) {
