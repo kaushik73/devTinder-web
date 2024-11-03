@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import Body from "./components/layout/Body";
 import Login from "./components/pages/Login";
 import { Provider } from "react-redux";
@@ -14,7 +14,7 @@ import PageNotFound from "./components/pages/PageNotFound";
 function App() {
   return (
     <Provider store={appStore}>
-      <BrowserRouter basename="/">
+      <HashRouter basename="/">
         <Routes>
           <Route path="/" element={<Body />}>
             <Route path="/" element={<Home />} />
@@ -27,7 +27,7 @@ function App() {
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   );
 }
