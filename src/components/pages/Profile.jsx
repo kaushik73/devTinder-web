@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
+import { BASE_URL, HEADERS } from "../../utils/constants";
 import { addUser } from "../../store/userSlice";
 import UserCard from "../cards/UserCard";
 import { validateForm } from "../../utils/formvalidation";
@@ -47,7 +47,7 @@ const Profile = () => {
           gender,
           profileURL,
         },
-        { withCredentials: true }
+        { headers: HEADERS, withCredentials: true }
       );
 
       if (res.status === 200) {
