@@ -15,7 +15,7 @@ import { useEffect } from "react";
 function App() {
   useEffect(() => {
     const env = import.meta.env.VITE_API_APP_ENV === "local" ? "Local" : "";
-    document.title = ` (${env}) Dev Tinder`;
+    document.title = ` ${env} Dev Tinder`;
   }, []);
 
   return (
