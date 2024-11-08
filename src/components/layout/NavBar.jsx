@@ -1,19 +1,22 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/constants";
 import { removeUser } from "../../store/userSlice";
 import { emptyFeedList } from "../../store/feedSlice";
 import { emptyRequestList } from "../../store/requestSlice";
 import { removeConnection } from "../../store/connectionReducer";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const NavBar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentURLPath = location.pathname;
   const hideLoginLocations = ["/login", "/signup"];
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
@@ -25,6 +28,12 @@ const NavBar = () => {
       console.error("Error : " + err);
     }
   };
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <div className="navbar h-header bg-base-200 ">

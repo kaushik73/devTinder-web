@@ -5,14 +5,17 @@ import axios from "axios";
 import { addConnection } from "../../store/connectionReducer";
 import ConnectionCard from "../cards/ConnectionCard";
 import ErrorMessage from "../common/ErrorMessage";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 const Connections = () => {
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connections);
   const getConnections = async () => {
     try {
+      setIsLoading(true);
       const res = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
       });
@@ -25,12 +28,20 @@ const Connections = () => {
     } catch (err) {
       console.error("Error fetching connections:", err);
       setError("Error fetching connections. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     getConnections();
   }, []);
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
   if (error) return <ErrorMessage message={error} />;
 
   return (

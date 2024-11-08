@@ -32,7 +32,6 @@ const Requests = () => {
     } catch (err) {
       console.error("Error fetching requests:", err);
       setError("Error fetching requests. Please try again.");
-      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }
