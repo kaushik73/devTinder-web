@@ -3,12 +3,14 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../store/userSlice";
 import { Link, useNavigate } from "react-router-dom";
+import LoadingSpinner from "../common/LoadingSpinner";
 import { BASE_URL } from "../../utils/constants";
 import ErrorMessage from "../common/ErrorMessage";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [err, setError] = useState("");
   const [somethingWrong, setSomethingWrong] = useState(false);
   const dispatch = useDispatch();
@@ -16,6 +18,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     try {
       e.preventDefault();
+      setIsLoading(true);
       const res = await axios.post(
         BASE_URL + "/login",
         {
@@ -39,6 +42,9 @@ const Login = () => {
       } else {
         setSomethingWrong(true);
       }
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -112,9 +118,13 @@ const Login = () => {
                 </div>
               )}
               <div className="card-actions justify-around items-center">
-                <button type="submit" className="btn btn-primary">
-                  Login
-                </button>
+                {isLoading ? (
+                  <LoadingSpinner />
+                ) : (
+                  <button type="submit" className="btn btn-primary">
+                    Login
+                  </button>
+                )}
                 <Link className="text-sm hover:text-blue-900" to="/signup">
                   New User? Please Create an account
                 </Link>

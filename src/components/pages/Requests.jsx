@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RequestCard from "../cards/RequestCard";
 import Toaster from "../common/Toaster";
 import ErrorMessage from "../common/ErrorMessage";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 const Requests = () => {
   const dispatch = useDispatch();
@@ -13,9 +14,11 @@ const Requests = () => {
   const [message, setMessage] = useState("");
   const [somethingWrong, setSomethingWrong] = useState(false);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const getRequests = async () => {
     try {
+      setIsLoading(true);
       const res = await axios.get(`${BASE_URL}/user/request/recieved`, {
         withCredentials: true,
       });
@@ -29,6 +32,9 @@ const Requests = () => {
     } catch (err) {
       console.error("Error fetching requests:", err);
       setError("Error fetching requests. Please try again.");
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -58,7 +64,12 @@ const Requests = () => {
 
   if (error) return <ErrorMessage message={error} />;
   if (somethingWrong) return <ErrorMessage message="Something went wrong." />;
-
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
   return (
     <div className="grid gap-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 my-3 mx-4">
       {requests &&
