@@ -1,9 +1,9 @@
 import { useState } from "react";
-import ErrorMessage from "../common/ErrorMessage";
+import ErrorMessage from "../components/common/ErrorMessage";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
-import { validateForm } from "../../utils/formvalidation";
+import { validateForm } from "../utils/formvalidation";
+import { BASE_URL } from "../utils/constants";
 
 const SignUp = () => {
   const [fName, setfName] = useState("");

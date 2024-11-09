@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { BASE_URL } from "../../utils/constants";
-import { addRequests, removeRequest } from "../../store/requestSlice";
+import { addRequests, removeRequest } from "../store/requestSlice";
 import { useDispatch, useSelector } from "react-redux";
-import RequestCard from "../cards/RequestCard";
-import Toaster from "../common/Toaster";
-import ErrorMessage from "../common/ErrorMessage";
-import LoadingSpinner from "../common/LoadingSpinner";
+import RequestCard from "../components/cards/RequestCard";
+import Toaster from "../components/common/Toaster";
+import ErrorMessage from "../components/common/ErrorMessage";
+import { BASE_URL } from "../utils/constants";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 
 const Requests = () => {
   const dispatch = useDispatch();

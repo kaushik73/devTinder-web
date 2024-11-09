@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL } from "../../utils/constants";
+import { BASE_URL } from "../utils/constants";
 import axios from "axios";
-import { addConnection } from "../../store/connectionReducer";
-import ConnectionCard from "../cards/ConnectionCard";
-import ErrorMessage from "../common/ErrorMessage";
-import LoadingSpinner from "../common/LoadingSpinner";
+import { addConnection } from "../store/connectionReducer";
+import ConnectionCard from "../components/cards/ConnectionCard";
+import ErrorMessage from "../components/common/ErrorMessage";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 
 const Connections = () => {
   const [error, setError] = useState("");

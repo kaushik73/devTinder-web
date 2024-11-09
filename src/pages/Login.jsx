@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../store/userSlice";
-import { Link, useNavigate } from "react-router-dom";
-import LoadingSpinner from "../common/LoadingSpinner";
-import { BASE_URL } from "../../utils/constants";
-import ErrorMessage from "../common/ErrorMessage";
+import { addUser } from "../store/userSlice";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
+import ErrorMessage from "../components/common/ErrorMessage";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +15,9 @@ const Login = () => {
   const [somethingWrong, setSomethingWrong] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const message = location.state?.message;
+
   const handleLogin = async (e) => {
     try {
       e.preventDefault();
@@ -56,6 +59,24 @@ const Login = () => {
         <div className="card bg-base-300 w-96 shadow-xl ">
           <div className="card-body">
             <h2 className="card-title m-auto">Login!</h2>
+            {message && (
+              <div role="alert" className="alert alert-error">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 shrink-0 stroke-current"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>{message}</span>
+              </div>
+            )}
             <form onSubmit={handleLogin}>
               <label className="input input-bordered flex items-center gap-2 mb-4">
                 <svg

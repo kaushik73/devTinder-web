@@ -1,13 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { BASE_URL } from "../../utils/constants";
+import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addFeed, removeUserFromFeed } from "../../store/feedSlice";
-import FeedCard from "../cards/FeedCard";
-import { useNavigate } from "react-router-dom";
-import ErrorMessage from "../common/ErrorMessage";
-import LoadingSpinner from "../common/LoadingSpinner";
-import Toaster from "../common/Toaster";
+import { addFeed, removeUserFromFeed } from "../store/feedSlice";
+import FeedCard from "../components/cards/FeedCard";
+import ErrorMessage from "../components/common/ErrorMessage";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import Toaster from "../components/common/Toaster";
 
 const Feed = () => {
   const [error, setError] = useState("");
@@ -15,10 +14,8 @@ const Feed = () => {
   const [toaster, setToaster] = useState({ message: "", type: "" });
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const feedData = useSelector((store) => store.feed);
-  const userData = useSelector((store) => store.user);
 
   const getFeedData = async () => {
     try {
@@ -79,8 +76,12 @@ const Feed = () => {
   }, [feedData]);
 
   if (error) return <ErrorMessage message={error} />;
-  if (isLoading) return <LoadingSpinner />;
-
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
   return (
     <>
       {feedData && feedData.length > 0 ? (

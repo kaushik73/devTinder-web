@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
-import { addUser } from "../../store/userSlice";
-import UserCard from "../cards/UserCard";
-import { validateForm } from "../../utils/formvalidation";
-import ErrorMessage from "../common/ErrorMessage";
+import { BASE_URL } from "../utils/constants";
+import { addUser } from "../store/userSlice";
+import { validateForm } from "../utils/formvalidation";
+import ErrorMessage from "../components/common/ErrorMessage";
 import { useNavigate } from "react-router-dom";
+import UserCard from "../components/cards/UserCard";
 
 const Profile = () => {
   const user = useSelector((store) => store.user);
