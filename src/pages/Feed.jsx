@@ -76,12 +76,7 @@ const Feed = () => {
   }, [feedData]);
 
   if (error) return <ErrorMessage message={error} />;
-  if (isLoading)
-    return (
-      <div className="flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
+  if (isLoading) return <LoadingSpinner />;
   return (
     <>
       {feedData && feedData.length > 0 ? (

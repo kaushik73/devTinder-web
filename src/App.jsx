@@ -3,6 +3,8 @@ import appStore from "./store/appStore";
 import { HashRouter } from "react-router-dom";
 import { useEffect } from "react";
 import AppRoutes from "./routing/AppRoutes";
+import { createRoot } from "react-dom/client";
+import "./styles/index.css";
 
 function App() {
   useEffect(() => {
@@ -21,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+createRoot(document.getElementById("root")).render(<App />);

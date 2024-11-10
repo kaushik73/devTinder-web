@@ -63,12 +63,7 @@ const Requests = () => {
 
   if (error) return <ErrorMessage message={error} />;
   if (somethingWrong) return <ErrorMessage message="Something went wrong." />;
-  if (isLoading)
-    return (
-      <div className="flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
+  if (isLoading) return <LoadingSpinner />;
   return (
     <div className="grid gap-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 my-3 mx-4">
       {requests &&

@@ -50,12 +50,7 @@ const Body = () => {
   }, [userData]);
 
   if (showError) return <ErrorMessage />;
-  if (loading)
-    return (
-      <div className="flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
+  if (loading) return <LoadingSpinner />;
   return (
     <div className="flex flex-col min-h-screen">
       <div className="min-h-header">

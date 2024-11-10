@@ -36,12 +36,7 @@ const Connections = () => {
   useEffect(() => {
     getConnections();
   }, []);
-  if (isLoading)
-    return (
-      <div className="flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
+  if (isLoading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
 
   return (
