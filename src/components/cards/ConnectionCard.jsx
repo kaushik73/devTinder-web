@@ -1,6 +1,4 @@
 import Modal from "../common/Modal";
-import Chat from "../../pages/Chat";
-
 const ConnectionCard = ({ user }) => {
   return (
     <>
