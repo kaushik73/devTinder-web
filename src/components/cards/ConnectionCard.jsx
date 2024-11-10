@@ -23,12 +23,12 @@ const ConnectionCard = ({ user }) => {
             <p className="text-sm text-gray-700">{user.about}</p>
           </div>
           <div className="mt-4">
-            <Chat userId={user._id} conversationId={"temp"} />
-            {/* <Modal
+            {/* <Chat userId={user._id} conversationId={"temp"} /> */}
+            <Modal
               modalHeading="Coming Soon!"
               buttonContent="Chat"
               modalContent="Till then, connect to more peeps!"
-            /> */}
+            />
           </div>
         </div>
       </div>
