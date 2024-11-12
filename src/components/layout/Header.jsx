@@ -5,7 +5,7 @@ import { BASE_URL } from "../../utils/constants";
 import { removeUser } from "../../store/userSlice";
 import { emptyFeedList } from "../../store/feedSlice";
 import { emptyRequestList } from "../../store/requestSlice";
-import { removeConnection } from "../../store/connectionReducer";
+import { removeConnection } from "../../store/connectionSlice";
 import { useLocation } from "react-router-dom";
 
 const Header = () => {

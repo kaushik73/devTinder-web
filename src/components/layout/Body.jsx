@@ -27,7 +27,6 @@ const Body = () => {
       );
       const userData = res.data.data;
       dispatch(addUser(userData));
-      console.log("user data ", userData);
     } catch (err) {
       // token is not there in cookies
       if (err.status === 401) {
@@ -39,10 +38,6 @@ const Body = () => {
       setLoading(false);
     }
   };
-
-  // useEffect(() => {
-  //   if (!userData) fetchUser();
-  // }, []);
 
   useEffect(() => {
     if (!userData) fetchUser();

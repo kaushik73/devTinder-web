@@ -7,7 +7,7 @@ export default {
       height: {
         header: "80px", // Custom height for the header
         footer: "250px", // Custom height for the footer
-        content: "calc(100% - 330px)", // Full viewport height minus header and footer
+        content: "calc(100vh - 330px)", // Full viewport height minus header and footer
       },
     },
   },

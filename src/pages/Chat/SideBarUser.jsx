@@ -7,7 +7,7 @@ const SideBarUser = ({ user, isSelected, onClick, lastIdx }) => {
         }`}
         onClick={onClick}
       >
-        <div className="avatar">
+        <div className="avatar online">
           <div className="w-12 rounded-full">
             <img
               src={

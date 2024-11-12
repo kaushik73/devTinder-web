@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
-import { addConnection } from "../store/connectionReducer";
+import { addConnection } from "../store/connectionSlice";
 import ConnectionCard from "../components/cards/ConnectionCard";
 import ErrorMessage from "../components/common/ErrorMessage";
 import LoadingSpinner from "../components/common/LoadingSpinner";

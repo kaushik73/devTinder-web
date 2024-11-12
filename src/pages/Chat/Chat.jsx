@@ -31,7 +31,7 @@ const Chat = ({ userToChatId, userName, userProfileURL }) => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="flex flex-col h-full overflow-y-auto1">
+    <div className="flex flex-col h-full">
       {/* User Name  */}
       <div className="bg-gray-200 p-4 font-semibold text-lg text-black">
         {userName}
@@ -55,16 +55,17 @@ const Chat = ({ userToChatId, userName, userProfileURL }) => {
 
               // const isLastMsg = index === messagesLength - 1;
               return (
-                <Message
-                  ref={messagesEndRef}
-                  key={message._id}
-                  message={message}
-                  index={index}
-                  userToChatId={userToChatId}
-                  userProfileURL={userProfileURL}
-                  myProfile={user.profileURL}
-                  showDateDivider={showDateDivider}
-                />
+                <div key={message._id}>
+                  <Message
+                    key={message._id}
+                    message={message}
+                    index={index}
+                    userToChatId={userToChatId}
+                    userProfileURL={userProfileURL}
+                    myProfile={user.profileURL}
+                    showDateDivider={showDateDivider}
+                  />
+                </div>
               );
             })}
             {/* Ref to scroll only to messages, not footer */}

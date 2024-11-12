@@ -23,7 +23,7 @@ const MainChatPage = () => {
       if (sidebarUsers && sidebarUsers.length > 0) {
         setSideBarUsers(sidebarUsers);
       } else {
-        setError("No side bar users to show!");
+        setError("No Chats to show, Make some connection first!");
       }
     } catch (e) {
       console.error("Error fetching side bar users data:", e);
@@ -41,10 +41,10 @@ const MainChatPage = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="flex h-screen">
+    <div className="flex min-h-content">
       {/* Sidebar (Sticky) */}
       {sideBarUsers && (
-        <div className="sidebar bg-gray-800 text-white w-1/4 h-full">
+        <div className="sidebar  bg-gray-800 text-white w-1/4 h-full">
           <Sidebar
             sideBarUsers={sideBarUsers}
             selectedUser={selectedUser?._id}
