@@ -35,7 +35,7 @@ const Message = ({
     <div key={index} className="flex flex-col items-center">
       {/* Show date divider if it's a new day */}
       {showDateDivider && (
-        <div className="w-full text-center text-gray-500 my-4 text-sm">
+        <div className="w-full text-center text-gray-500 my-4 text-sm divider divider-secondary px-[20%]">
           {dayjs(message.createdAt).isToday()
             ? "Today"
             : dayjs(message.createdAt).format("MMMM D, YYYY")}

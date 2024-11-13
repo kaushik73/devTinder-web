@@ -12,8 +12,6 @@ const Chat = ({ userToChatId, userName, userProfileURL }) => {
   const user = useSelector((store) => store.user);
   const messagesLength = messages.length;
 
-  console.log(messages, "messages");
-
   // Scroll to the bottom of messages only, not the footer
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -44,7 +42,7 @@ const Chat = ({ userToChatId, userName, userProfileURL }) => {
         </div>
       ) : (
         <div className="flex-1 p-4 overflow-y-auto bg-gray-100 space-y-2">
-          <div className="overflow-y-auto1 max-h-full">
+          <div className="max-h-full">
             {messages.map((message, index) => {
               const prevMessageDate =
                 index > 0 ? dayjs(messages[index - 1].createdAt) : null;
@@ -70,9 +68,6 @@ const Chat = ({ userToChatId, userName, userProfileURL }) => {
             })}
             {/* Ref to scroll only to messages, not footer */}
             <div className="h-0  bg-red-800" ref={messagesEndRef} />
-            {/* <div className="h-4  bg-green-800" /> */}
-            {/* <div className="h-4  bg-orange-800" /> */}
-            {/* <div className="h-4  bg-gray-800" /> */}
           </div>
         </div>
       )}

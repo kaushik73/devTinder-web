@@ -48,13 +48,13 @@ const Body = () => {
   if (loading) return <LoadingSpinner />;
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="min-h-header">
+      <div className="h-header">
         <Header />
       </div>
-      <main className="flex-grow">
+      <main className="flex-grow min-h-content">
         <Outlet />
       </main>
-      <div className="min-h-footer">
+      <div className="h-footer">
         <Footer />
       </div>
     </div>

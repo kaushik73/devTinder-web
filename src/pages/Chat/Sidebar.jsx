@@ -1,8 +1,9 @@
 import SideBarSearch from "./SideBarSearch";
 import SideBarUser from "./SideBarUser";
+import { useSocketContext } from "../../context/SocketContextProvider";
 
 const Sidebar = ({ sideBarUsers, selectedUser, onSelectUser }) => {
-  // To be implemented
+  // Todo : To be implemented
   const handleSidebarSearch = (searchUser) => {
     if (!searchUser) return;
     const searchedUser = sideBarUsers.find(
@@ -13,24 +14,30 @@ const Sidebar = ({ sideBarUsers, selectedUser, onSelectUser }) => {
     console.log("searchedUser", searchedUser);
     selectedUser = searchedUser;
   };
+
+  const { onlineUsers } = useSocketContext();
+  console.log("onlineUsers", onlineUsers);
+
   return (
-    <div className="sidebar bg-gray-800 text-white h-full flex flex-col">
+    <div className="bg-gray-800 text-white h-full flex flex-col">
       {/* Sidebar Search */}
-      {/* <div className="p-4"> */}
       <SideBarSearch handleSidebarSearch={handleSidebarSearch} />
-      {/* </div> */}
 
       {/* Users List (Scrollable) */}
       <div className="flex-1 overflow-y-auto">
-        {sideBarUsers.map((user, idx) => (
-          <SideBarUser
-            key={user._id}
-            user={user}
-            isSelected={selectedUser === user._id}
-            onClick={() => onSelectUser(user)}
-            lastIdx={idx === sideBarUsers.length - 1}
-          />
-        ))}
+        {sideBarUsers.map((user, idx) => {
+          const isUserOnline = onlineUsers.includes(user._id);
+          return (
+            <SideBarUser
+              key={user._id}
+              user={user}
+              isSelected={selectedUser === user._id}
+              onClick={() => onSelectUser(user)}
+              lastIdx={idx === sideBarUsers.length - 1}
+              isUserOnline={isUserOnline}
+            />
+          );
+        })}
       </div>
     </div>
   );

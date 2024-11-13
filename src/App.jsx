@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import AppRoutes from "./routing/AppRoutes";
 import { createRoot } from "react-dom/client";
 import "./styles/index.css";
-import { SocketSliceProvider } from "./store/socketSliceProvider";
+import { SocketContextProvider } from "./context/SocketContextProvider";
 
 function App() {
   useEffect(() => {
@@ -16,11 +16,11 @@ function App() {
   return (
     <div data-theme="dark">
       <Provider store={appStore}>
-        <SocketSliceProvider>
+        <SocketContextProvider>
           <HashRouter basename="/">
             <AppRoutes />
           </HashRouter>
-        </SocketSliceProvider>
+        </SocketContextProvider>
       </Provider>
     </div>
   );

@@ -1,4 +1,5 @@
-const SideBarUser = ({ user, isSelected, onClick, lastIdx }) => {
+const SideBarUser = ({ user, isSelected, onClick, lastIdx, isUserOnline }) => {
+  const isUserOnlineClass = isUserOnline ? "online" : "";
   return (
     <>
       <div
@@ -7,7 +8,7 @@ const SideBarUser = ({ user, isSelected, onClick, lastIdx }) => {
         }`}
         onClick={onClick}
       >
-        <div className="avatar online">
+        <div className={`avatar ${isUserOnlineClass}`}>
           <div className="w-12 rounded-full">
             <img
               src={

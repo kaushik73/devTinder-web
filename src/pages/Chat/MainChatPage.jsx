@@ -41,10 +41,10 @@ const MainChatPage = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="flex min-h-content">
+    <div className="flex h-content">
       {/* Sidebar (Sticky) */}
       {sideBarUsers && (
-        <div className="sidebar  bg-gray-800 text-white w-1/4 h-full">
+        <div className="bg-gray-800 text-white w-1/4 h-full sticky ">
           <Sidebar
             sideBarUsers={sideBarUsers}
             selectedUser={selectedUser?._id}
@@ -54,13 +54,15 @@ const MainChatPage = () => {
       )}
 
       {/* Chat Window */}
-      <div className="flex-1">
+      <div className="flex-1 flex  flex-col">
         {selectedUser ? (
-          <Chat
-            userToChatId={selectedUser._id}
-            userName={`${selectedUser.fName} ${selectedUser.lName}`}
-            userProfileURL={selectedUser.profileURL}
-          />
+          <div className="flex-1 flex flex-col h-full overflow-y-auto">
+            <Chat
+              userToChatId={selectedUser._id}
+              userName={`${selectedUser.fName} ${selectedUser.lName}`}
+              userProfileURL={selectedUser.profileURL}
+            />
+          </div>
         ) : (
           <div className="flex items-center justify-center h-full text-gray-500">
             Select a conversation to start chatting
