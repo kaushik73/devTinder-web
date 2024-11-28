@@ -10,9 +10,6 @@ const requestSlice = createSlice({
         (req) => req.fromUserId._id !== action.payload
       );
 
-      console.log("updatedRequestsList", updatedRequestsList);
-      console.log("action.payload", action.payload);
-
       return updatedRequestsList;
     },
     emptyRequestList: () => {

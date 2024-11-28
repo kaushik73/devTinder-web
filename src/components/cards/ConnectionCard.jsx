@@ -1,5 +1,15 @@
-import Modal from "../common/Modal";
-const ConnectionCard = ({ user }) => {
+import { useNavigate } from "react-router-dom";
+
+const UserCard = ({ user }) => {
+  const navigate = useNavigate();
+  const handleChatClick = () =>
+    navigate("/chat", {
+      state: {
+        userToChatId: user._id,
+        userName: user.fName + " " + user.lName,
+      },
+    });
+
   return (
     <>
       <div className="card card-side bg-white shadow-lg rounded-lg overflow-hidden m-4 flex flex-col md:flex-row">
@@ -21,17 +31,52 @@ const ConnectionCard = ({ user }) => {
             <p className="text-sm text-gray-700">{user.about}</p>
           </div>
           <div className="mt-4">
-            {/* <Chat userId={user._id} conversationId={"temp"} /> */}
-            <Modal
-              modalHeading="Coming Soon!"
-              buttonContent="Chat"
-              modalContent="Till then, connect to more peeps!"
-            />
+            <button
+              onClick={handleChatClick}
+              className="text-slate-300 bg-black rounded-lg px-4 py-2 text-lg font-semibold"
+            >
+              Chat
+            </button>
           </div>
         </div>
       </div>
+
+      {/* {isChatOpen && (
+        <Chat
+          userToChatId={user._id}
+          userName={user.fName + " " + user.lName}
+        />
+      )} */}
     </>
   );
 };
 
-export default ConnectionCard;
+export default UserCard;
+
+//  {/* Modal for Chat */}
+//  {false && (
+//   <div className="fixed inset-0 flex items-center justify-center z-50">
+//     {/* Modal background overlay */}
+//     <div
+//       className="fixed inset-0 bg-black opacity-50"
+//       onClick={handleCloseModal}
+//     ></div>
+
+//     {/* Modal content */}
+//     <div className="relative bg-white w-[50%] mx-auto rounded-lg shadow-lg p-4 z-50">
+//       <div className="flex justify-between items-center border-b pb-2 mb-4">
+//         <h2 className="text-xl font-semibold text-gray-800">Chat Room</h2>
+//         <button
+//           onClick={handleCloseModal}
+//           className="text-gray-500 hover:text-gray-800 focus:outline-none"
+//         >
+//           &times;
+//         </button>
+//       </div>
+//       <Chat
+//         userToChatId={user._id}
+//         userName={user.fName + " " + user.lName}
+//       />
+//     </div>
+//   </div>
+// )}

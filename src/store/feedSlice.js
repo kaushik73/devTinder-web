@@ -8,9 +8,6 @@ const feedSlice = createSlice({
     removeUserFromFeed: (state, action) => {
       const updatedFeedList = state.filter((req) => req._id !== action.payload);
 
-      console.log("updatedFeedList", updatedFeedList);
-      console.log("action.payload", action.payload);
-
       return updatedFeedList;
     },
     emptyFeedList: () => {

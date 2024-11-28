@@ -17,3 +17,9 @@
 For development: Run vite or vite dev, and Vite will load .env and .env.local.
 
 For production: When you run vite build, Vite will use .env and .env.production.
+
+https://avatar-placeholder.iran.liara.run/document/
+
+https://avatar.iran.liara.run/public/boy?username=[value]
+
+https://avatar.iran.liara.run/public/girl?username=[value]

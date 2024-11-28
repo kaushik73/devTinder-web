@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Body from "../components/layout/Body";
 import Home from "../pages/Home";
@@ -10,6 +9,8 @@ import PageNotFound from "../pages/PageNotFound";
 import Login from "../pages/Login";
 import Feed from "../pages/Feed";
 import LoginProtectedRoute from "./LoginProtectedRoute";
+import Chat from "../pages/Chat/Chat";
+import MainChatPage from "../pages/Chat/MainChatPage";
 
 function AppRoutes() {
   return (
@@ -48,6 +49,14 @@ function AppRoutes() {
           element={
             <LoginProtectedRoute>
               <Connections />
+            </LoginProtectedRoute>
+          }
+        />
+        <Route
+          path="/chat"
+          element={
+            <LoginProtectedRoute>
+              <MainChatPage />
             </LoginProtectedRoute>
           }
         />

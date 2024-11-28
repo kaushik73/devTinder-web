@@ -27,7 +27,6 @@ const Body = () => {
       );
       const userData = res.data.data;
       dispatch(addUser(userData));
-      console.log("user data ", userData);
     } catch (err) {
       // token is not there in cookies
       if (err.status === 401) {
@@ -40,31 +39,22 @@ const Body = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (!userData) fetchUser();
-  // }, []);
-
   useEffect(() => {
     if (!userData) fetchUser();
     else setLoading(false);
   }, [userData]);
 
   if (showError) return <ErrorMessage />;
-  if (loading)
-    return (
-      <div className="flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
+  if (loading) return <LoadingSpinner />;
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="min-h-header">
+      <div className="h-header">
         <Header />
       </div>
-      <main className="flex-grow">
+      <main className="flex-grow min-h-content">
         <Outlet />
       </main>
-      <div className="min-h-footer">
+      <div className="h-footer">
         <Footer />
       </div>
     </div>

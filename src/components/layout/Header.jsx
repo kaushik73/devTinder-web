@@ -5,7 +5,7 @@ import { BASE_URL } from "../../utils/constants";
 import { removeUser } from "../../store/userSlice";
 import { emptyFeedList } from "../../store/feedSlice";
 import { emptyRequestList } from "../../store/requestSlice";
-import { removeConnection } from "../../store/connectionReducer";
+import { removeConnection } from "../../store/connectionSlice";
 import { useLocation } from "react-router-dom";
 
 const Header = () => {
@@ -65,6 +65,9 @@ const Header = () => {
                 </li>
                 <li>
                   <Link to="/connections">Connections</Link>
+                </li>
+                <li>
+                  <Link to="/chat">Chat</Link>
                 </li>
                 <li>
                   <Link to="/profile" className="justify-between">

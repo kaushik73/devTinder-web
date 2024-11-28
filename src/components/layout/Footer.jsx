@@ -1,4 +1,9 @@
+import { useLocation } from "react-router-dom";
+
 const Footer = () => {
+  const location = useLocation();
+  const currentURLPath = location?.pathname;
+  // if (currentURLPath === "/chat") return;
   return (
     <footer className="footer footer-center bg-primary text-primary-content p-10">
       <aside>
