@@ -3,14 +3,21 @@ import useChatData from "../../hooks/useChatData";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import Message from "./Message";
 import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { useSelector } from "react-redux";
 import MessageBox from "./MessageBox";
+import useListenMessages from "../../hooks/useListenMessages";
+import ErrorMessage from "../../components/common/ErrorMessage";
+dayjs.extend(relativeTime);
 
-const Chat = ({ userToChatId, userName, userProfileURL }) => {
+const Chat = ({ userToChatId, userName, userProfileURL, lastActiveTime }) => {
   const messagesEndRef = useRef();
-  const { messages, isLoading, error, sendMessage } = useChatData(userToChatId);
+  const { messages, isLoading, error, sendMessage, setMessages } =
+    useChatData(userToChatId);
   const user = useSelector((store) => store.user);
+  useListenMessages(setMessages);
   const messagesLength = messages.length;
+  console.log("messages--> ", messages);
 
   // Scroll to the bottom of messages only, not the footer
   useEffect(() => {
@@ -24,15 +31,21 @@ const Chat = ({ userToChatId, userName, userProfileURL }) => {
     }
   }, [messages]);
 
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (error) return <ErrorMessage message={error} />;
 
   if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="flex flex-col h-full">
       {/* User Name  */}
-      <div className="bg-gray-200 p-4 font-semibold text-lg text-black">
+      <div className=" bg-gray-200 p-4 font-semibold text-lg text-black">
         {userName}
+        <br />
+        {lastActiveTime && (
+          <span className="text-xs text-gray-400">
+            Last active: {dayjs(lastActiveTime).fromNow()}
+          </span>
+        )}
       </div>
 
       {/* Message Container */}

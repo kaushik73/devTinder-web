@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 const useChatData = (userToChatId) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [messages, setMessages] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (userToChatId) {
       fetchMessages();
@@ -41,11 +42,14 @@ const useChatData = (userToChatId) => {
       } catch (e) {
         console.error("Error sending message:", e);
         setError("Failed to send message.");
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       }
     }
   };
 
-  return { messages, isLoading, error, sendMessage };
+  return { messages, isLoading, error, sendMessage, setMessages };
 };
 
 export default useChatData;

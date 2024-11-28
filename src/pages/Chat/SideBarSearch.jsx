@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
+// Todo : To be Implemented
 const SideBarSearch = ({ handleSidebarSearch }) => {
   const [search, setSearch] = useState();
   const handleSubmit = (e) => {
-    console.log("handleSubmit", search);
-
     e.preventDefault();
     handleSidebarSearch(search);
     setSearch("");

@@ -16,7 +16,6 @@ const Sidebar = ({ sideBarUsers, selectedUser, onSelectUser }) => {
   };
 
   const { onlineUsers } = useSocketContext();
-  console.log("onlineUsers", onlineUsers);
 
   return (
     <div className="bg-gray-800 text-white h-full flex flex-col">
@@ -26,7 +25,7 @@ const Sidebar = ({ sideBarUsers, selectedUser, onSelectUser }) => {
       {/* Users List (Scrollable) */}
       <div className="flex-1 overflow-y-auto">
         {sideBarUsers.map((user, idx) => {
-          const isUserOnline = onlineUsers.includes(user._id);
+          const isUserOnline = onlineUsers.onlineUsers.includes(user._id);
           return (
             <SideBarUser
               key={user._id}

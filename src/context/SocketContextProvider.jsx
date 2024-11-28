@@ -1,36 +1,33 @@
 import { createContext, useEffect, useContext, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import { setOnlineUsers, resetSocket } from "../store/socketSlice";
+import { useSelector } from "react-redux";
 import io from "socket.io-client";
 import { BASE_URL } from "../utils/constants";
 
-const SocketContext = createContext(null);
+const SocketContext = createContext();
 
-export const useSocketContext = () => {
-  return useContext(SocketContext);
-};
+export const useSocketContext = () => useContext(SocketContext);
 
 export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const [lastActiveTimes, setLastActiveTimes] = useState({});
   const authUser = useSelector((store) => store.user);
 
   useEffect(() => {
     if (authUser) {
-      const socket = io(BASE_URL, {
+      const socketInstance = io(BASE_URL, {
         query: {
           userId: authUser._id,
         },
       });
 
-      setSocket(socket);
+      setSocket(socketInstance);
 
-      // socket.on() is used to listen to the events. can be used both on client and server side
-      socket.on("getOnlineUsers", (users) => {
+      socketInstance.on("getOnlineUsers", (users) => {
         setOnlineUsers(users);
       });
 
-      return () => socket.close();
+      return () => socketInstance.close();
     } else {
       if (socket) {
         socket.close();
@@ -40,7 +37,7 @@ export const SocketContextProvider = ({ children }) => {
   }, [authUser]);
 
   return (
-    <SocketContext.Provider value={{ socket, onlineUsers }}>
+    <SocketContext.Provider value={{ socket, onlineUsers, lastActiveTimes }}>
       {children}
     </SocketContext.Provider>
   );

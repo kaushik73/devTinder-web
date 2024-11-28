@@ -61,6 +61,8 @@ const MainChatPage = () => {
               userToChatId={selectedUser._id}
               userName={`${selectedUser.fName} ${selectedUser.lName}`}
               userProfileURL={selectedUser.profileURL}
+              lastActiveTime=""
+              // lastActiveTime={selectedUser.lastActiveTime}
             />
           </div>
         ) : (
