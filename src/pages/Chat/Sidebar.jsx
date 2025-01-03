@@ -18,14 +18,14 @@ const Sidebar = ({ sideBarUsers, selectedUser, onSelectUser }) => {
   const { onlineUsers } = useSocketContext();
 
   return (
-    <div className="bg-gray-800 text-white h-full flex flex-col">
+    <div className="bg-gray-800 text-white h-full min-h-44 flex flex-col">
       {/* Sidebar Search */}
       <SideBarSearch handleSidebarSearch={handleSidebarSearch} />
 
       {/* Users List (Scrollable) */}
       <div className="flex-1 overflow-y-auto">
         {sideBarUsers.map((user, idx) => {
-          const isUserOnline = onlineUsers.onlineUsers.includes(user._id);
+          const isUserOnline = onlineUsers?.onlineUsers?.includes(user._id);
           return (
             <SideBarUser
               key={user._id}

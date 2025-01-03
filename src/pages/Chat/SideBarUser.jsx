@@ -1,4 +1,10 @@
-const SideBarUser = ({ user, isSelected, onClick, lastIdx, isUserOnline }) => {
+const SideBarUser = ({
+  user,
+  isSelected,
+  onClick,
+  lastIdx,
+  isUserOnline = "",
+}) => {
   const isUserOnlineClass = isUserOnline ? "online" : "";
   return (
     <>

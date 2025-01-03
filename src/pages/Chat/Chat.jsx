@@ -55,7 +55,7 @@ const Chat = ({ userToChatId, userName, userProfileURL, lastActiveTime }) => {
         </div>
       ) : (
         <div className="flex-1 p-4 overflow-y-auto bg-gray-100 space-y-2">
-          <div className="max-h-full">
+          <div className="max-h-full min-h-44">
             {messages.map((message, index) => {
               const prevMessageDate =
                 index > 0 ? dayjs(messages[index - 1].createdAt) : null;
