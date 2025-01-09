@@ -19,7 +19,7 @@ const MainChatPage = () => {
         withCredentials: true,
       });
 
-      sidebarUsers = sidebarUsers.data.data;
+      sidebarUsers = sidebarUsers?.data?.data;
       if (sidebarUsers && sidebarUsers.length > 0) {
         setSideBarUsers(sidebarUsers);
       } else {

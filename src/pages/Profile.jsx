@@ -37,7 +37,7 @@ const Profile = () => {
       return;
     }
     try {
-      const res = await axios.patch(
+      const res = await axios.put(
         BASE_URL + "/profile/edit",
         {
           fName,
